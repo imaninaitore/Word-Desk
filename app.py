@@ -1,5 +1,8 @@
 import tkinter as tk
+
 window= tk.Tk()
+window.geometry("600x400")
+window.resizable(False, False)
 
 header_frame= tk.Frame(window)
 header_frame.pack()
@@ -18,3 +21,4 @@ search_word=tk.Entry(search_frame).grid(row=0,column=1)
 search_btn=tk.Button(search_frame,text="search").grid(row=0,column=2)
 
 window.mainloop()
+
