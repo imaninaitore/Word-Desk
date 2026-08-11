@@ -34,6 +34,33 @@ password_entry = tk.Entry(login_frame,show="*")
 password_entry.grid( row=3, column=1, padx=10, pady=10)
 
 
+# LOGIN FUNCTION
+def login():
+
+    username = username_entry.get()
+    password = password_entry.get()
+
+    # Check if fields are empty
+    if username == "" or password == "":
+        messagebox.showerror(
+            "Error",
+            "Please enter your username and password."
+        )
+
+    # Temporary login details
+    elif username == "admin" and password == "1234":
+        messagebox.showinfo(
+            "Success",
+            "Login successful!"
+        )
+
+    else:
+        messagebox.showerror(
+            "Login Failed",
+            "Incorrect username or password."
+        )
+
+
 # LOGIN BUTTON
 login_button = tk.Button( login_frame, text="LOGIN", command=login)
 login_button.grid(row=4,column=0,columnspan=2,pady=20)
