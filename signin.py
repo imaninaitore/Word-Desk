@@ -85,13 +85,8 @@ def create_account():
         return
     
     try:
-        cursor.execute(
-            "INSERT INTO USERS(username, password) VALUES (?, ?)",
-            (username, password)
-        )
-
+        cursor.execute( "INSERT INTO USERS(username, password) VALUES (?, ?)", (username, password))
         connection.commit()
-
         messagebox.showinfo( "Success","Account created successfully!")
 
     except sqlite3.IntegrityError:

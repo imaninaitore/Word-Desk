@@ -1,10 +1,25 @@
+import sqlite3
 import tkinter as tk
 from tkinter import messagebox
+
+#DATABASE CONNECTION
+connection = sqlite3.connect("WordDesk.db")
+
+# CREATE CURSOR
+cursor = connection.cursor()
+
+cursor.execute(
+    """
+    SELECT * FROM users
+    WHERE username = ? AND password = ?
+    """,(username, password)
+)
 
 # MAIN WINDOW
 window = tk.Tk()
 window.title("Word Desk - Login")
 window.geometry("500x500")
+
 
 
 # LOGIN FRAME
