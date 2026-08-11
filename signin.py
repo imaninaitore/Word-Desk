@@ -81,16 +81,21 @@ def create_account():
 
     # Check if passwords match
     elif password != confirm_password:
-        messagebox.showerror(
-            "Error",
-            "Passwords do not match."
+        messagebox.showerror("Error","Passwords do not match.")
+        return
+    
+    try:
+        cursor.execute(
+            "INSERT INTO USERS(username, password) VALUES (?, ?)",
+            (username, password)
         )
 
-    else:
-        messagebox.showinfo(
-            "Success",
-            "Account created successfully!"
-        )
+        connection.commit()
+
+        messagebox.showinfo( "Success","Account created successfully!")
+
+    except sqlite3.IntegrityError:
+        messagebox.showerror("Error","That username already exists.")    
 
 
 # CREATE ACCOUNT BUTTON
