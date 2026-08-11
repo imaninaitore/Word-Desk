@@ -1,5 +1,24 @@
+import sqlite3
 import tkinter as tk
 from tkinter import messagebox
+
+#DATABASE CONNECTION
+connection = sqlite3.connect("WordDesk.db")
+
+# CREATE CURSOR
+cursor = connection.cursor()
+
+# CREATE USERS TABLE
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )
+""")
+
+# SAVE CHANGES
+connection.commit()
 
 # MAIN WINDOW
 window = tk.Tk()
