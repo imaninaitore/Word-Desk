@@ -45,9 +45,38 @@ confirm_label.grid(row=4, column=0, padx=10, pady=10)
 confirm_entry = tk.Entry(account_frame,show="*")
 confirm_entry.grid(row=4, column=1, padx=10, pady=10)
 
+
+# CREATE ACCOUNT FUNCTION
+def create_account():
+
+    username = username_entry.get()
+    password = password_entry.get()
+    confirm_password = confirm_entry.get()
+
+    # Check if fields are empty
+    if username == "" or password == "" or confirm_password == "":
+        messagebox.showerror(
+            "Error",
+            "Please fill in all fields."
+        )
+
+    # Check if passwords match
+    elif password != confirm_password:
+        messagebox.showerror(
+            "Error",
+            "Passwords do not match."
+        )
+
+    else:
+        messagebox.showinfo(
+            "Success",
+            "Account created successfully!"
+        )
+
+
 # CREATE ACCOUNT BUTTON
 
-create_button = tk.Button(account_frame,text="CREATE ACCOUNT")
+create_button = tk.Button(account_frame,text="CREATE ACCOUNT",command=create_account)
 create_button.grid(row=5, column=0, columnspan=2, pady=20)
 
 # LOGIN BUTTON
