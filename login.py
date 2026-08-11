@@ -8,19 +8,11 @@ connection = sqlite3.connect("WordDesk.db")
 # CREATE CURSOR
 cursor = connection.cursor()
 
-cursor.execute(
-    """
-    SELECT * FROM users
-    WHERE username = ? AND password = ?
-    """,(username, password)
-)
 
 # MAIN WINDOW
 window = tk.Tk()
 window.title("Word Desk - Login")
 window.geometry("500x500")
-
-
 
 # LOGIN FRAME
 login_frame = tk.Frame(window)
@@ -61,19 +53,28 @@ def login():
             "Error",
             "Please enter your username and password."
         )
+        return
+    #searching the database
+    cursor.execute(
+    """
+    SELECT * FROM users
+    WHERE username = ? AND password = ?
+    """,(username, password)
+ )
+# Search for the user
+    cursor.execute(
+    "SELECT * FROM users WHERE username = ? AND password = ?",
+    (username, password)
+     )
 
-    # Temporary login details
-    elif username == "admin" and password == "1234":
-        messagebox.showinfo(
-            "Success",
-            "Login successful!"
-        )
+# Fetch the matching user
+    user = cursor.fetchone()
 
+# Check if a user was found
+    if user:
+      messagebox.showinfo("Success", "Login successful!")
     else:
-        messagebox.showerror(
-            "Login Failed",
-            "Incorrect username or password."
-        )
+      messagebox.showerror("Error", "Incorrect username or password.")
 
 
 # LOGIN BUTTON
