@@ -21,3 +21,12 @@ if response.status_code == 200:
 else:
 
     print("Could not find the dictionary file.")
+
+    #extraction section
+word_data = data[word]
+word = word_data["word"]
+
+for etymology in word_data["etymologies"]:
+  for details in etymology["partsOfSpeech"]:
+
+    part_of_speech = details["partOfSpeech"]
