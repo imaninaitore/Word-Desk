@@ -74,36 +74,39 @@ if response.status_code == 200:
 
     print("Dictionary data downloaded!")
 
+    for word in data:
+     
+     word_data = data[word]
+
+     word = word_data["word"]
+
+     for etymology in word_data["etymologies"]:
+
+       for details in etymology["partsOfSpeech"]:
+
+        part_of_speech = details["partOfSpeech"]
+
+        for definition in details["senses"]:
+
+            definition_text = definition["sense"]
+
+            examples = definition.get("examples", [])
+
+            example_text = " | ".join(examples)
+
+            cursor.execute("""
+            INSERT INTO words
+            (word, part_of_speech, definition, example)
+            VALUES (?, ?, ?, ?)
+            """, (
+                word,
+                part_of_speech,
+                definition_text,
+                example_text
+            ))
+
 else:
 
     print("Could not download dictionary data.")
 
-
-for word in data:
-    print(word) 
-      
-# for etymology in word_data["etymologies"]:
-
-#     for details in etymology["partsOfSpeech"]:
-
-#         part_of_speech = details["partOfSpeech"]
-
-#         for definition in details["senses"]:
-
-#             definition_text = definition["sense"]
-
-#             examples = definition.get("examples", [])
-
-#             example_text = " | ".join(examples)
-
-#             cursor.execute("""
-#             INSERT INTO words
-#             (word, part_of_speech, definition, example)
-#             VALUES (?, ?, ?, ?)
-#             """, (
-#                 word,
-#                 part_of_speech,
-#                 definition_text,
-#                 example_text
-#             ))
 
