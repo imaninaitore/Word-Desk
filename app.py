@@ -1,45 +1,5 @@
-# import customtkinter as ctk
-
-# window = ctk.CTk()
-# window.geometry("600x400")
-# window.resizable(False, False)
-
-# header_frame= ctk.CTkFrame(window)
-# header_frame.pack()
-
-# title= ctk.CTkLabel(header_frame,text="WORD DESK", font=("Arial", 28, "bold"))
-# title.pack(pady=10)
-# title2= ctk.CTkLabel(header_frame,text="Words, available offline.Right on your desk.",font=("Arial", 18))
-# title2.pack()
-
-# #search section
-# search_frame= ctk.CTkFrame(window)
-# search_frame.pack()
-
-# search_word=ctk.CTkLabel(search_frame,text="Search for a word: ",font=("Arial", 12)).grid(row=0,column=0)
-# search_word=ctk.CTkEntry(search_frame).grid(row=0,column=1)
-
-# search_btn=ctk.CTkButton(search_frame,text="search").grid(row=0,column=2)
-
-# info_frame= ctk.CTkFrame(window)
-# info_frame.pack()
-
-# #word
-# word_label = ctk.CTkLabel(info_frame, text="Word:",font=("Arial", 20, "bold"))
-# word_label.pack(pady=15)
-
-# #part of speech
-# part_of_speech_label = ctk.CTkLabel( info_frame, text="Part of speech:")
-# part_of_speech_label.pack(pady=5)
-
-# #definition
-# definition_label = ctk.CTkLabel( info_frame, text="Definition:", wraplength=600)
-
-# definition_label.pack(pady=10)
-
-# window.mainloop()
-
 import customtkinter as ctk
+import sqlite3
 
 window = ctk.CTk()
 window.geometry("700x600")
@@ -88,7 +48,45 @@ definition_title.pack(pady=(25, 5))
 definition_label = ctk.CTkLabel(info_frame, text="Search for a word to see its definition.", font=("Arial", 14), wraplength=550)
 definition_label.pack(padx=30, pady=5)
 
-#search function getting from the api
+#search function getting from the database
 
+def search_word():
+
+    word = search_word.get().lower()
+
+    connection = sqlite3.connect("WordDesk.db")
+    cursor = connection.cursor()
+
+    cursor.execute("""
+    SELECT part_of_speech, definition, example
+    FROM words
+    WHERE word = ?
+    """, (word,))
+
+    results = cursor.fetchall()
+
+    connection.close()
+
+    if results:
+
+        word_label.configure(text=word.capitalize())
+
+        part_of_speech_label.configure(
+            text="Part of speech: " + results[0][0]
+        )
+
+        definition_label.configure(
+            text="Definition: " + results[0][1]
+        )
+
+    else:
+
+        word_label.configure(text="Word not found")
+
+        part_of_speech_label.configure(text="")
+
+        definition_label.configure(
+            text="This word is not available in the offline dictionary."
+        )
 
 window.mainloop()
