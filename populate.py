@@ -77,6 +77,11 @@ if response.status_code == 200:
 else:
 
     print("Could not download dictionary data.")
+
+
+for word in data:
+    print(word) 
+      
 # for etymology in word_data["etymologies"]:
 
 #     for details in etymology["partsOfSpeech"]:
