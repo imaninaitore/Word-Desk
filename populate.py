@@ -28,9 +28,21 @@ for letter in letters:
 
 if response.status_code == 200:
 
-    data = response.json()
+    files =response.json()
 
-    print("Dictionary data downloaded!")
+    for file in files:
+
+            if file["name"].endswith(".json"):
+
+                file_url = file["download_url"]
+
+                print("Downloading:", file["name"])
+
+                file_response = requests.get(file_url)
+
+                if file_response.status_code == 200:
+
+                    data = file_response.json()
 
     for word in data:
      
