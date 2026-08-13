@@ -61,8 +61,6 @@ CREATE TABLE IF NOT EXISTS words (
 )
 """)
 
-connection.commit()
-
 
 url = "https://raw.githubusercontent.com/mhollingshead/open-dictionary/main/api/a/ab.json"
 
@@ -105,8 +103,13 @@ if response.status_code == 200:
                 example_text
             ))
 
+    connection.commit()
+
+    print("Dictionary data saved to SQLite!")        
+
 else:
 
     print("Could not download dictionary data.")
 
 
+connection.close()
