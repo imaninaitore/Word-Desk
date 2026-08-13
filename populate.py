@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS words (
 """)
 
 
-url = "https://raw.githubusercontent.com/mhollingshead/open-dictionary/contents/api"
+url = "https://api.github.com/repos/mhollingshead/open-dictionary/contents/api"
 
 letters ="abcdefghijklmnopqrstuvwxyz"
 
@@ -26,9 +26,9 @@ for letter in letters:
 
     response = requests.get(folder_url)
 
-if response.status_code == 200:
+    if response.status_code == 200:
 
-    files =response.json()
+     files =response.json()
 
     for file in files:
 
@@ -46,9 +46,9 @@ if response.status_code == 200:
 
                     for word in data:
      
-                      word_data = data[word]
+                         word_data = data[word]
 
-                      word = word_data["word"]
+                         word = word_data["word"]
 
                     for etymology in word_data["etymologies"]:
 
