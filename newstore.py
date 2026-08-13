@@ -44,3 +44,45 @@ for etymology in word_data["etymologies"]:
     for example in definition["examples"]:
 
       print(f"Example:{example}")    
+
+
+      #SQLITE DATABASE STORAGE
+import sqlite3
+
+connection = sqlite3.connect("WordDesk.db")
+cursor = connection.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS words (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    word TEXT,
+    part_of_speech TEXT,
+    definition TEXT,
+    example TEXT
+)
+""")
+
+for etymology in word_data["etymologies"]:
+
+    for details in etymology["partsOfSpeech"]:
+
+        part_of_speech = details["partOfSpeech"]
+
+        for definition in details["senses"]:
+
+            definition_text = definition["sense"]
+
+            examples = definition.get("examples", [])
+
+            example_text = " | ".join(examples)
+
+            cursor.execute("""
+            INSERT INTO words
+            (word, part_of_speech, definition, example)
+            VALUES (?, ?, ?, ?)
+            """, (
+                word,
+                part_of_speech,
+                definition_text,
+                example_text
+            ))
