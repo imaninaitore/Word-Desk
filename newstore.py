@@ -1,6 +1,3 @@
-import requests
-import sqlite3
-
 # word = input("Search for a word: ").lower()
 
 # first_letter = word[0]
@@ -45,21 +42,10 @@ import sqlite3
 #     for example in definition["examples"]:
 
 #       print(f"Example:{example}")    
-url = "https://raw.githubusercontent.com/mhollingshead/open-dictionary/main/api/a/ab.json"
 
-response = requests.get(url)
-
-if response.status_code == 200:
-
-    data = response.json()
-
-    print("Dictionary data downloaded!")
-
-else:
-
-    print("Could not download dictionary data.")
 
 #SQLITE DATABASE STORAGE
+import requests
 import sqlite3
 
 connection = sqlite3.connect("WordDesk.db")
@@ -75,28 +61,44 @@ CREATE TABLE IF NOT EXISTS words (
 )
 """)
 
-for etymology in word_data["etymologies"]:
+connection.commit()
 
-    for details in etymology["partsOfSpeech"]:
 
-        part_of_speech = details["partOfSpeech"]
+url = "https://raw.githubusercontent.com/mhollingshead/open-dictionary/main/api/a/ab.json"
 
-        for definition in details["senses"]:
+response = requests.get(url)
 
-            definition_text = definition["sense"]
+if response.status_code == 200:
 
-            examples = definition.get("examples", [])
+    data = response.json()
 
-            example_text = " | ".join(examples)
+    print("Dictionary data downloaded!")
 
-            cursor.execute("""
-            INSERT INTO words
-            (word, part_of_speech, definition, example)
-            VALUES (?, ?, ?, ?)
-            """, (
-                word,
-                part_of_speech,
-                definition_text,
-                example_text
-            ))
+else:
+
+    print("Could not download dictionary data.")
+# for etymology in word_data["etymologies"]:
+
+#     for details in etymology["partsOfSpeech"]:
+
+#         part_of_speech = details["partOfSpeech"]
+
+#         for definition in details["senses"]:
+
+#             definition_text = definition["sense"]
+
+#             examples = definition.get("examples", [])
+
+#             example_text = " | ".join(examples)
+
+#             cursor.execute("""
+#             INSERT INTO words
+#             (word, part_of_speech, definition, example)
+#             VALUES (?, ?, ?, ?)
+#             """, (
+#                 word,
+#                 part_of_speech,
+#                 definition_text,
+#                 example_text
+#             ))
 
