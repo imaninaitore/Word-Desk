@@ -111,5 +111,4 @@ else:
 
     print("Could not download dictionary data.")
 
-
 connection.close()
