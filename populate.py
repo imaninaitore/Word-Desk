@@ -28,9 +28,9 @@ for letter in letters:
 
     if response.status_code == 200:
 
-     files =response.json()
+       files =response.json()
 
-    for file in files:
+       for file in files:
 
             if file["name"].endswith(".json"):
 
@@ -50,32 +50,32 @@ for letter in letters:
 
                          word = word_data["word"]
 
-                    for etymology in word_data["etymologies"]:
+                         for etymology in word_data["etymologies"]:
 
-                      for details in etymology["partsOfSpeech"]:
+                          for details in etymology["partsOfSpeech"]:
 
-                       part_of_speech = details["partOfSpeech"]
+                             part_of_speech = details["partOfSpeech"]
 
-                       for definition in details["senses"]:
+                             for definition in details["senses"]:
+ 
+                                definition_text = definition["sense"]
 
-                        definition_text = definition["sense"]
+                                examples = definition.get("examples", [])
 
-                        examples = definition.get("examples", [])
+                                example_text = " | ".join(examples)
 
-                        example_text = " | ".join(examples)
+                                cursor.execute("""
+                                 INSERT INTO words
+                                 (word, part_of_speech, definition, example)
+                                 VALUES (?, ?, ?, ?)
+                                 """, (
+                                      word,
+                                      part_of_speech,
+                                      definition_text,
+                                      example_text
+                                ))
 
-                        cursor.execute("""
-                        INSERT INTO words
-                        (word, part_of_speech, definition, example)
-                        VALUES (?, ?, ?, ?)
-                        """, (
-                            word,
-                            part_of_speech,
-                            definition_text,
-                            example_text
-                        ))
-
-                connection.commit()
+                          connection.commit()
 
             else:
              print("Could not download:", file["name"])
