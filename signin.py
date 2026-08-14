@@ -72,6 +72,20 @@ def create_account():
     password = password_entry.get()
     confirm_password = confirm_entry.get()
 
+    if username == "" or password == "":
+      messagebox.showerror(
+        "Error",
+        "Please fill in all fields."
+     )
+      return
+
+    if len(password) < 6:
+     messagebox.showerror(
+        "Invalid Password",
+        "Password must be at least 6 characters long."
+     )
+     return
+
     # Check if fields are empty
     if username == "" or password == "" or confirm_password == "":
         messagebox.showerror(
