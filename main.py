@@ -35,7 +35,7 @@ def show_page(page_name):
 
     page.tkraise()
 
-    pages["signin"] = SignInPage(
+pages["signin"] = SignInPage(
     container,
     show_page
 )
@@ -74,3 +74,9 @@ for page in pages.values():
         relwidth=1,
         relheight=1
     )
+
+#starting age
+show_page("signin")
+
+#run 
+app.mainloop()
