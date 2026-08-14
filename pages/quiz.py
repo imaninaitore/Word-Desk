@@ -2,11 +2,7 @@ import customtkinter as ctk
 import sqlite3
 import random
 
-
-# -----------------------------
 # WINDOW
-# -----------------------------
-
 quiz_window = ctk.CTk()
 quiz_window.geometry("750x700")
 quiz_window.resizable(False, False)
@@ -16,19 +12,13 @@ ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
 
 
-# -----------------------------
 # VARIABLES
-# -----------------------------
-
 score = 0
 round_number = 0
 correct_answer = ""
 
 
-# -----------------------------
 # DATABASE
-# -----------------------------
-
 def get_words():
 
     connection = sqlite3.connect("WordDesk.db")
@@ -46,10 +36,7 @@ def get_words():
     return results
 
 
-# -----------------------------
 # START QUIZ
-# -----------------------------
-
 def start_quiz():
 
     global score
@@ -72,10 +59,7 @@ def start_quiz():
     next_question()
 
 
-# -----------------------------
 # NEXT QUESTION
-# -----------------------------
-
 def next_question():
 
     global round_number
@@ -161,10 +145,7 @@ def next_question():
     )
 
 
-# -----------------------------
 # CHECK ANSWER
-# -----------------------------
-
 def check_answer():
 
     global score
@@ -189,28 +170,29 @@ def check_answer():
         )
 
         feedback_label.configure(
-            text="✓ Correct!",
+            text=f"✓ Correct!\n\n"
+                 f"Correct answer: {correct_answer}",
             text_color="green"
         )
 
     else:
 
         feedback_label.configure(
-            text=f"✗ Incorrect! The answer was: {correct_answer}",
+            text=f"✗ Incorrect!\n\n"
+                 f"Your answer: {answer}\n"
+                 f"Correct answer: {correct_answer}",
             text_color="red"
         )
 
-    # Move to next question after a short delay
-    quiz_window.after(
-        800,
-        next_question
+    # Hide the submit button
+    submit_button.pack_forget()
+
+    # Show the next question button
+    next_button.pack(
+        pady=10
     )
 
-
-# -----------------------------
 # FINAL SCORE
-# -----------------------------
-
 def show_final_score():
 
     question_label.configure(
@@ -237,9 +219,7 @@ def show_final_score():
     )
 
 
-# -----------------------------
 # RESTART QUIZ
-# -----------------------------
 
 def restart_quiz():
 
@@ -278,9 +258,7 @@ def restart_quiz():
     next_question()
 
 
-# -----------------------------
 # GO BACK HOME
-# -----------------------------
 
 def back_to_home():
 
@@ -292,10 +270,7 @@ def back_to_home():
     )
 
 
-# ==================================================
 # WELCOME SCREEN
-# ==================================================
-
 welcome_frame = ctk.CTkFrame(
     quiz_window,
     fg_color="transparent"
@@ -307,8 +282,7 @@ welcome_frame.pack(
 )
 
 
-# Logo / title
-
+# title
 welcome_title = ctk.CTkLabel(
     welcome_frame,
     text="WORD DESK",
@@ -358,14 +332,12 @@ get_started_button.pack(
 )
 
 # QUIZ SCREEN
-
 quiz_frame = ctk.CTkFrame(
     quiz_window,
     corner_radius=20
 )
 
 # Top section
-
 top_frame = ctk.CTkFrame(
     quiz_frame,
     fg_color="transparent"
@@ -376,7 +348,6 @@ top_frame.pack(
     padx=20,
     pady=(15, 5)
 )
-
 
 back_button = ctk.CTkButton(
     top_frame,
@@ -440,18 +411,15 @@ score_label.grid(
 
 
 # Question card
-
 question_card = ctk.CTkFrame(
     quiz_frame,
     corner_radius=15
 )
-
 question_card.pack(
     fill="x",
     padx=40,
     pady=20
 )
-
 
 question_label = ctk.CTkLabel(
     question_card,
@@ -466,7 +434,6 @@ question_label.pack(
     pady=35
 )
 
-
 # Answers
 
 answers_frame = ctk.CTkFrame(
@@ -478,9 +445,7 @@ answers_frame.pack(
     pady=5
 )
 
-
 selected_answer = ctk.StringVar()
-
 
 option1 = ctk.CTkRadioButton(
     answers_frame,
@@ -562,10 +527,23 @@ submit_button = ctk.CTkButton(
 submit_button.pack(
     pady=20
 )
+#next question button
+next_button = ctk.CTkButton(
+    quiz_frame,
+    text="Next Question",
+    width=220,
+    height=45,
+    corner_radius=10,
+    font=("Arial", 16, "bold"),
+    command=next_question
+)
 
+next_button.pack(
+    pady=10
+)
 
-# -----------------------------
+next_button.pack_forget()
+
 # RUN
-# -----------------------------
 
 quiz_window.mainloop()
