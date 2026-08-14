@@ -25,3 +25,12 @@ container.pack(
     expand=True
 )
 
+#page manager
+pages = {}
+
+
+def show_page(page_name):
+
+    page = pages[page_name]
+
+    page.tkraise()
