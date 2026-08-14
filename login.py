@@ -1,13 +1,13 @@
 import sqlite3
 import tkinter as tk
 from tkinter import messagebox
+import bcrypt
 
 #DATABASE CONNECTION
 connection = sqlite3.connect("WordDesk.db")
 
 # CREATE CURSOR
 cursor = connection.cursor()
-
 
 # MAIN WINDOW
 window = tk.Tk()
