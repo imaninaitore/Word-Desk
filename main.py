@@ -1,10 +1,11 @@
 import customtkinter as ctk
 
+from pages.signin import SignInPage
+from pages.login import LoginPage
+from pages.instructions import InstructionsPage
 from pages.home import HomePage
 from pages.quiz import QuizPage
-from pages.dictionary import DictionaryPage
-from pages.favorites import FavoritesPage
-
+from pages.learning import LearningPage
 
 # ==========================================
 # MAIN WINDOW
@@ -17,9 +18,7 @@ app.geometry("900x650")
 app.resizable(False, False)
 
 
-# ==========================================
 # CONTAINER
-# ==========================================
 
 container = ctk.CTkFrame(
     app,
@@ -32,9 +31,7 @@ container.pack(
 )
 
 
-# ==========================================
 # PAGE MANAGER
-# ==========================================
 
 pages = {}
 
@@ -46,9 +43,8 @@ def show_page(page_name):
     page.tkraise()
 
 
-# ==========================================
 # CREATE PAGES
-# ==========================================
+
 
 pages["home"] = HomePage(
     container,
@@ -71,9 +67,7 @@ pages["favorites"] = FavoritesPage(
 )
 
 
-# ==========================================
 # POSITION ALL PAGES
-# ==========================================
 
 for page in pages.values():
 
@@ -83,17 +77,10 @@ for page in pages.values():
         relwidth=1,
         relheight=1
     )
-
-
-# ==========================================
+ 
 # START PAGE
-# ==========================================
 
 show_page("home")
 
-
-# ==========================================
 # RUN
-# ==========================================
-
 app.mainloop()
