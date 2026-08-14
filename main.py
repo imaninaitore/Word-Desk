@@ -64,3 +64,13 @@ pages["learning"] = LearningPage(
     container,
     show_page
 )
+
+#positioning
+for page in pages.values():
+
+    page.place(
+        x=0,
+        y=0,
+        relwidth=1,
+        relheight=1
+    )
