@@ -34,3 +34,33 @@ def show_page(page_name):
     page = pages[page_name]
 
     page.tkraise()
+
+    pages["signin"] = SignInPage(
+    container,
+    show_page
+)
+
+pages["login"] = LoginPage(
+    container,
+    show_page
+)
+
+pages["instructions"] = InstructionsPage(
+    container,
+    show_page
+)
+
+pages["home"] = HomePage(
+    container,
+    show_page
+)
+
+pages["quiz"] = QuizPage(
+    container,
+    show_page
+)
+
+pages["learning"] = LearningPage(
+    container,
+    show_page
+)
