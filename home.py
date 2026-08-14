@@ -13,7 +13,7 @@ class HomePage(ctk.CTkFrame):
         super().__init__(parent)
 
         self.show_page = show_page
-        
+
 #search function getting from the database
 
 def search_function():
@@ -98,4 +98,14 @@ definition_title.pack(pady=(25, 5))
 definition_label = ctk.CTkLabel(info_frame, text="Search for a word to see its definition.", font=("Arial", 14), wraplength=550)
 definition_label.pack(padx=30, pady=5)
 
-window.mainloop()
+#Quiz button
+quiz_button = ctk.CTkButton(
+            self,
+            text="Go to Quiz",
+            width=150,
+            command=lambda: self.show_page("quiz")
+        )
+
+quiz_button.pack(
+            pady=10
+        )
