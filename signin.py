@@ -86,13 +86,6 @@ def create_account():
      )
      return
 
-    # Check if fields are empty
-    if username == "" or password == "" or confirm_password == "":
-        messagebox.showerror(
-            "Error",
-            "Please fill in all fields."
-        )
-
     # Check if passwords match
     elif password != confirm_password:
         messagebox.showerror("Error","Passwords do not match.")
@@ -105,7 +98,6 @@ def create_account():
 
     except sqlite3.IntegrityError:
         messagebox.showerror("Error","That username already exists.")    
-
 
 # CREATE ACCOUNT BUTTON
 
