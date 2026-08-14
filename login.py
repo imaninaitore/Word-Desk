@@ -49,32 +49,59 @@ def login():
 
     # Check if fields are empty
     if username == "" or password == "":
+
         messagebox.showerror(
             "Error",
             "Please enter your username and password."
         )
-        return
-    #searching the database
-    cursor.execute(
-    """
-    SELECT * FROM users
-    WHERE username = ? 
-    """,(username,)
- )
-# Search for the user
-    cursor.execute(
-    "SELECT * FROM users WHERE username = ? AND password = ?",
-    (username, password)
-     )
 
-# Fetch the matching user
+        return
+
+    # Search for the username
+    cursor.execute(
+        """
+        SELECT * FROM users
+        WHERE username = ?
+        """,
+        (username,)
+    )
+
+    # Get the user
     user = cursor.fetchone()
 
-# Check if a user was found
-    if user:
-      messagebox.showinfo("Success", "Login successful!")
+    # Check if username exists
+    if user is None:
+
+        messagebox.showerror(
+            "Error",
+            "Incorrect username or password."
+        )
+
+        return
+
+    # Get the hashed password
+    stored_password = user[2]
+
+    # Check the password
+    password_correct = bcrypt.checkpw(
+        password.encode("utf-8"),
+        stored_password.encode("utf-8")
+    )
+
+    # Check result
+    if password_correct:
+
+        messagebox.showinfo(
+            "Success",
+            "Login successful!"
+        )
+
     else:
-      messagebox.showerror("Error", "Incorrect username or password.")
+
+        messagebox.showerror(
+            "Error",
+            "Incorrect username or password."
+        )
 
 
 # LOGIN BUTTON
