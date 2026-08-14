@@ -52,7 +52,7 @@ username_entry.grid(row=2, column=1, padx=10, pady=10)
 # PASSWORD
 #info
 password_info = tk.Label( text="Password must be at least 6 characters.", font=("Arial", 10))
-password_info.grid( row=4, column=1, pady=(0, 10))
+password_info.pack()
 
 password_label = tk.Label(account_frame,text="Password:")
 password_label.grid(row=3, column=0, padx=10, pady=10)
