@@ -29,11 +29,17 @@ container.pack(
 pages = {}
 
 
+# Change which page is displayed
 def show_page(page_name):
 
+    # Get the selected page
     page = pages[page_name]
 
+    # Bring the selected page to the front
     page.tkraise()
+
+    # Print the current page for testing
+    print("Current page:", page_name)
 
 pages["signin"] = SignInPage(
     container,
