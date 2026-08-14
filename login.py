@@ -58,8 +58,8 @@ def login():
     cursor.execute(
     """
     SELECT * FROM users
-    WHERE username = ? AND password = ?
-    """,(username, password)
+    WHERE username = ? 
+    """,(username,)
  )
 # Search for the user
     cursor.execute(
