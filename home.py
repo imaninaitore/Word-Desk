@@ -1,11 +1,19 @@
 import customtkinter as ctk
 import sqlite3
 
-window = ctk.CTk()
-window.geometry("700x600")
-window.resizable(False, False)
-window.title("Word Desk")
+# window = ctk.CTk()
+# window.geometry("700x600")
+# window.resizable(False, False)
+# window.title("Word Desk")
 
+class HomePage(ctk.CTkFrame):
+
+    def __init__(self, parent, show_page):
+
+        super().__init__(parent)
+
+        self.show_page = show_page
+        
 #search function getting from the database
 
 def search_function():
