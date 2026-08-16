@@ -130,3 +130,39 @@ class HomePage(ctk.CTkFrame):
     self.welcome_label.configure(
         text=f"Welcome, {username}!"
     )         
+
+
+    # Get the user's highest quiz score
+   def get_high_score(self):
+
+    # Get the logged-in username
+    username = self.get_current_user()
+
+    # If nobody is logged in, return 0
+    if username is None:
+        return 0
+
+    # Connect to the database
+    connection = sqlite3.connect("WordDesk.db")
+
+    # Create a cursor
+    cursor = connection.cursor()
+
+    # Find the highest score for this user
+    cursor.execute("""
+        SELECT MAX(score)
+        FROM quiz_scores
+        WHERE username = ?
+    """, (username,))
+
+    # Get the result
+    result = cursor.fetchone()
+
+    # Close the connection
+    connection.close()
+
+    # Return the high score
+    if result[0] is None:
+        return 0
+
+    return result[0]  
