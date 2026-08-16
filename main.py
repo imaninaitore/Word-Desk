@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import sqlite3
 
 from pages.signin import SignInPage
 from pages.login import LoginPage
@@ -6,6 +7,31 @@ from pages.instructions import InstructionsPage
 from pages.home import HomePage
 from pages.quiz import QuizPage
 from pages.learning import LearningPage
+
+# DATABASE SETUP
+
+# Connect to the WordDesk database
+connection = sqlite3.connect("WordDesk.db")
+
+# Create a cursor
+cursor = connection.cursor()
+
+# Create the quiz scores table
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS quiz_scores (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        score INTEGER NOT NULL,
+        total_questions INTEGER NOT NULL,
+        played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+""")
+
+# Save the table
+connection.commit()
+
+# Close the database connection
+connection.close()
 
 # MAIN WINDOW
 app = ctk.CTk()
