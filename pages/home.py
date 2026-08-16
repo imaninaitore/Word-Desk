@@ -9,11 +9,14 @@ import sqlite3
 #class to make the homepage a frame that lives inside the main application
 class HomePage(ctk.CTkFrame):
 
-  def __init__(self, parent, show_page):
-
+  def __init__(self, parent, show_page, get_current_user, set_current_user):
+               
         super().__init__(parent)
 
         self.show_page = show_page
+
+        self.get_current_user = get_current_user
+        self.set_current_user = set_current_user
 
         #search function getting from the database
 
@@ -65,6 +68,11 @@ class HomePage(ctk.CTkFrame):
         title2 = ctk.CTkLabel(header_frame, text="Words, available offline. Right on your desk.", font=("Arial", 14))
         title2.pack(pady=(5, 0))
 
+        username = self.get_current_user()
+
+        welcome_label = ctk.CTkLabel( header_frame,text=f"Welcome, {username}!",font=("Arial", 18, "bold"))
+        welcome_label.pack(pady=(10, 0))
+        
 #search
         search_frame = ctk.CTkFrame(self, corner_radius=15)
         search_frame.pack(padx=40, pady=15, fill="x")
