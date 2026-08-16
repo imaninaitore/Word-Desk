@@ -41,6 +41,10 @@ def show_page(page_name):
     # Bring the selected page to the front
     page.tkraise()
 
+    # Update the username whenever HomePage is opened
+    if page_name == "home":
+        page.update_user()
+
     # Print the current page for testing
     print("Current page:", page_name)
 
