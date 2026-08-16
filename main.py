@@ -42,6 +42,16 @@ def show_page(page_name):
     # Print the current page for testing
     print("Current page:", page_name)
 
+# Get the currently logged-in user
+def get_current_user():
+    return current_user
+
+# Set the currently logged-in user
+def set_current_user(username):
+    global current_user
+    current_user = username
+    print("Logged in user:", current_user)
+    
 pages["signin"] = SignInPage(
     container,
     show_page
@@ -72,9 +82,6 @@ pages["learning"] = LearningPage(
     show_page
 )
 
-# Get the currently logged-in user
-def get_current_user():
-    return current_user
 
 #positioning
 for page in pages.values():
