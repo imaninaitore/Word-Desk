@@ -74,10 +74,10 @@ class QuizPage(ctk.CTkFrame):
             # Close the database connection
             connection.close()
 
-            # Print database information for testing
-            print("Database:", self.database_path)
-            print("Words found:", len(results))
-            print("Data:", results)
+            # # Print database information for testing
+            # print("Database:", self.database_path)
+            # print("Words found:", len(results))
+            # print("Data:", results)
 
             # Return the results
             return results

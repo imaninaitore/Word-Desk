@@ -81,7 +81,7 @@ for page in pages.values():
         relheight=1
     )
 
-#starting age
+#starting page
 show_page("signin")
 
 #run 
