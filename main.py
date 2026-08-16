@@ -62,7 +62,8 @@ pages["signin"] = SignInPage(
 
 pages["login"] = LoginPage(
     container,
-    show_page
+    show_page,
+    set_current_user
 )
 
 pages["instructions"] = InstructionsPage(
