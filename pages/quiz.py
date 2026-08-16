@@ -16,7 +16,7 @@ import os
 class QuizPage(ctk.CTkFrame):
 
     # Create the quiz page
-    def __init__(self, parent, show_page):
+    def __init__(self, parent, show_page, get_current_user,set_current_user):
 
         # Initialize the parent frame
         super().__init__(parent)

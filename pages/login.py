@@ -264,7 +264,8 @@ class LoginPage(ctk.CTkFrame):
                 "Success",
                 "Login successful!"
             )
-
+            #store logged in users username
+            self.set_current_user(username)
 
             # Clear the login fields
             self.username_entry.delete(0, "end")

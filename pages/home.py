@@ -70,8 +70,8 @@ class HomePage(ctk.CTkFrame):
 
         username = self.get_current_user()
 
-        welcome_label = ctk.CTkLabel( header_frame,text=f"Welcome, {username}!",font=("Arial", 18, "bold"))
-        welcome_label.pack(pady=(10, 0))
+        self.welcome_label = ctk.CTkLabel( header_frame,text=f"Welcome, {username}!",font=("Arial", 18, "bold"))
+        self.welcome_label.pack(pady=(10, 0))
 
 #search
         search_frame = ctk.CTkFrame(self, corner_radius=15)
@@ -121,4 +121,12 @@ class HomePage(ctk.CTkFrame):
        self.set_current_user(None)
 
     # Go back to the login page
-       self.show_page("login")       
+       self.show_page("login")   
+
+   def update_user(self):
+
+    username = self.get_current_user()
+
+    self.welcome_label.configure(
+        text=f"Welcome, {username}!"
+    )         
