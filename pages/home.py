@@ -115,6 +115,66 @@ class HomePage(ctk.CTkFrame):
         logout_button = ctk.CTkButton(self,text="Logout",width=150,command=self.logout)
         logout_button.pack(pady=(5, 15))  
 
+# SCORE SECTION
+
+        # Create the score frame
+        score_frame = ctk.CTkFrame(
+            self,
+            corner_radius=15
+        )
+
+        score_frame.pack(
+            padx=40,
+            pady=10,
+            fill="x"
+        )
+
+        # Get the current high score
+        high_score = self.get_high_score()
+
+        # Display the high score
+        self.high_score_label = ctk.CTkLabel(
+            score_frame,
+            text=f"High Score: {high_score} / 10",
+            font=("Arial", 18, "bold")
+        )
+
+        self.high_score_label.pack(
+            pady=(15, 10)
+        )
+
+# Get the last three games
+        last_scores = self.get_last_scores()
+
+# Create the history text
+        if last_scores:
+
+           history_text = "Last 3 Games:\n\n"
+
+           for number, game in enumerate(last_scores, start=1):
+        
+               score, total_questions, played_at = game
+
+               history_text += (
+                   f"{number}. {score} / {total_questions}\n"
+               )
+
+        else:
+
+           history_text = "Last 3 Games:\n\nNo games played yet."
+
+# Display the history
+        self.history_label = ctk.CTkLabel(
+            score_frame,
+            text=history_text,
+            font=("Arial", 14),
+            justify="center"
+        )
+
+        self.history_label.pack(
+            pady=(0, 15)
+        )
+
    def logout(self):
 
     # Remove the logged-in user
