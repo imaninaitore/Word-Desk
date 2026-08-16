@@ -644,6 +644,47 @@ class QuizPage(ctk.CTkFrame):
             pady=10
         )
 
+    # SAVE SCORE
+
+# Save the completed quiz score to the database
+    def save_score(self):
+
+         # Get the username of the logged-in user
+         username = self.get_current_user()
+
+         # Make sure a user is logged in
+         if username is None:
+             print("No logged-in user. Score was not saved.")
+             return
+
+         # Connect to the WordDesk database
+         connection = sqlite3.connect(self.database_path)
+
+         # Create a cursor
+         cursor = connection.cursor()
+
+         # Save the score
+         cursor.execute("""
+             INSERT INTO quiz_scores
+             (username, score, total_questions)
+             VALUES (?, ?, ?)
+         """, (
+             username,
+             self.score,
+             10
+         ))
+
+         # Save the changes
+         connection.commit()
+     
+         # Close the database connection
+         connection.close()
+
+         # Print confirmation for testing
+         print(
+             f"Score saved: {username} - "
+             f"{self.score}/10"
+         )
 
     # FINAL SCORE
 
