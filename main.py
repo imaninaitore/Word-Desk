@@ -27,7 +27,8 @@ container.pack(
 
 #page manager
 pages = {}
-
+# Store the currently logged-in user
+current_user = None
 
 # Change which page is displayed
 def show_page(page_name):
