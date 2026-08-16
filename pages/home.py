@@ -166,3 +166,37 @@ class HomePage(ctk.CTkFrame):
         return 0
 
     return result[0]  
+
+   # Get the user's last three quiz games
+   def get_last_scores(self):
+
+    # Get the logged-in username
+    username = self.get_current_user()
+
+    # If nobody is logged in, return an empty list
+    if username is None:
+        return []
+
+    # Connect to the database
+    connection = sqlite3.connect("WordDesk.db")
+
+    # Create a cursor
+    cursor = connection.cursor()
+
+    # Get the three most recent games
+    cursor.execute("""
+        SELECT score, total_questions, played_at
+        FROM quiz_scores
+        WHERE username = ?
+        ORDER BY id DESC
+        LIMIT 3
+    """, (username,))
+
+    # Get the results
+    results = cursor.fetchall()
+
+    # Close the connection
+    connection.close()
+
+    # Return the results
+    return results
