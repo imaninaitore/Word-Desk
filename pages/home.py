@@ -190,7 +190,39 @@ class HomePage(ctk.CTkFrame):
     self.welcome_label.configure(
         text=f"Welcome, {username}!"
     )         
+     
+    # Get the user's high score
+    high_score = self.get_high_score()
 
+    # Update the high score
+    self.high_score_label.configure(
+        text=f"🏆 High Score: {high_score} / 10"
+    )
+
+    # Get the user's last three games
+    last_scores = self.get_last_scores()
+
+    # Create the history text
+    if last_scores:
+
+        history_text = "Last 3 Games:\n\n"
+
+        for number, game in enumerate(last_scores, start=1):
+
+            score, total_questions, played_at = game
+
+            history_text += (
+                f"{number}. {score} / {total_questions}\n"
+            )
+
+    else:
+
+        history_text = "Last 3 Games:\n\nNo games played yet."
+
+    # Update the history
+    self.history_label.configure(
+        text=history_text
+    )
 
     # Get the user's highest quiz score
    def get_high_score(self):
