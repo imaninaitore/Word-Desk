@@ -24,6 +24,10 @@ class QuizPage(ctk.CTkFrame):
         # Store the page manager function
         self.show_page = show_page
 
+        # Store the function that gets the logged-in user
+        self.get_current_user = get_current_user
+
+
         # Store the user's score
         self.score = 0
 
