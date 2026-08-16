@@ -9,7 +9,7 @@ import sqlite3
 #class to make the homepage a frame that lives inside the main application
 class HomePage(ctk.CTkFrame):
 
-  def __init__(self, parent, show_page, get_current_user, set_current_user):
+   def __init__(self, parent, show_page, get_current_user, set_current_user):
                
         super().__init__(parent)
 
@@ -115,10 +115,10 @@ class HomePage(ctk.CTkFrame):
         logout_button = ctk.CTkButton(self,text="Logout",width=150,command=self.logout)
         logout_button.pack(pady=(5, 15))  
 
-def logout(self):
+   def logout(self):
 
     # Remove the logged-in user
-    self.set_current_user(None)
+       self.set_current_user(None)
 
     # Go back to the login page
-    self.show_page("login")        
+       self.show_page("login")       

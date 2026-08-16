@@ -23,7 +23,7 @@ cursor = connection.cursor()
 class LoginPage(ctk.CTkFrame):
 
     # Set up the login page
-    def __init__(self, parent, show_page):
+    def __init__(self, parent, show_page,set_current_user):
 
         # Initialize the parent frame
         super().__init__(parent)
@@ -31,6 +31,7 @@ class LoginPage(ctk.CTkFrame):
         # Save the page manager
         self.show_page = show_page
 
+        self.set_current_user = set_current_user
         # LOGIN FRAME
 
         # Create the frame that holds the login widgets
