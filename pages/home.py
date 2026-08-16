@@ -72,7 +72,7 @@ class HomePage(ctk.CTkFrame):
 
         welcome_label = ctk.CTkLabel( header_frame,text=f"Welcome, {username}!",font=("Arial", 18, "bold"))
         welcome_label.pack(pady=(10, 0))
-        
+
 #search
         search_frame = ctk.CTkFrame(self, corner_radius=15)
         search_frame.pack(padx=40, pady=15, fill="x")
@@ -109,3 +109,8 @@ class HomePage(ctk.CTkFrame):
         quiz_button = ctk.CTkButton(self,text="Go to Quiz",width=150,command=lambda: self.show_page("quiz"))
 
         quiz_button.pack(pady=10)
+
+# Logout button
+
+        logout_button = ctk.CTkButton(self,text="Logout",width=150,command=self.logout)
+        logout_button.pack(pady=(5, 15))      
