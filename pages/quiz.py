@@ -691,6 +691,9 @@ class QuizPage(ctk.CTkFrame):
     # Display the final quiz score
     def show_final_score(self):
 
+        # Save the completed game
+        self.save_score()  
+
         # Display the final score
         self.question_label.configure(
             text=f"QUIZ COMPLETE!\n\n"
