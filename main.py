@@ -72,6 +72,10 @@ pages["learning"] = LearningPage(
     show_page
 )
 
+# Get the currently logged-in user
+def get_current_user():
+    return current_user
+
 #positioning
 for page in pages.values():
 
