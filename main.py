@@ -27,6 +27,8 @@ container.pack(
 
 #page manager
 pages = {}
+
+
 # Store the currently logged-in user
 current_user = None
 
@@ -51,7 +53,8 @@ def set_current_user(username):
     global current_user
     current_user = username
     print("Logged in user:", current_user)
-    
+
+
 pages["signin"] = SignInPage(
     container,
     show_page
@@ -69,12 +72,16 @@ pages["instructions"] = InstructionsPage(
 
 pages["home"] = HomePage(
     container,
-    show_page
+    show_page,
+    get_current_user,
+    set_current_user
 )
 
 pages["quiz"] = QuizPage(
     container,
-    show_page
+    show_page,
+    get_current_user,
+    set_current_user
 )
 
 pages["learning"] = LearningPage(
